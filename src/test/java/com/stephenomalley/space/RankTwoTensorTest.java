@@ -27,13 +27,11 @@ public class RankTwoTensorTest {
         Assert.assertEquals(matrix.length, 2);
     }
 
+
     @Test
     public void testDefaultTensorMatrixAllZero() throws Exception {
-        double[][] matrix = this.tensor.getTensorMatrix();
-        double [] empty = new double[2];
-        for (double[] vector : matrix){
-            Assert.assertArrayEquals(empty, vector,0.0);
-        }
+        RankTwoTensor expected = new RankTwoTensor(new double[][]{{0, 0},{0, 0}});
+        Assert.assertEquals(expected, this.tensor);
     }
 
     @Test
@@ -50,28 +48,23 @@ public class RankTwoTensorTest {
 
     @Test
     public void testAddTensor() throws Exception {
-        double[][] actual = this.tensor.add(tensorB).getTensorMatrix();
-        Assert.assertArrayEquals(this.tensorB.getTensorMatrix()[0], actual[0], 0);
-        Assert.assertArrayEquals(this.tensorB.getTensorMatrix()[1], actual[1], 0);
+        RankTwoTensor actual = this.tensor.add(tensorB);
+        Assert.assertEquals(this.tensorB, actual);
     }
 
     @Test
     public void testAddTensorToNonDefaultTensor()throws Exception{
         this.tensor.setTensorMatrix(new double[][]{{1, 2}, {3, 4}});
-        double[][] actual = this.tensor.add(tensorB).getTensorMatrix();
-        double[][] expected = {{12, 3},{9, 16}};
-        Assert.assertArrayEquals(expected[0], actual[0], 0);
-        Assert.assertArrayEquals(expected[0], actual[0], 0);
+        RankTwoTensor actual = this.tensor.add(tensorB);
+        Assert.assertEquals(new RankTwoTensor(new double[][]{{12, 3},{9, 16}}), actual);
 
     }
 
     @Test
     public void testScalarMultiplicationOfTensor() throws Exception{
         this.tensor.setTensorMatrix(new double[][]{{1, 2}, {3, 4}});
-        double[][] actual = this.tensor.scalarMultiply(2).getTensorMatrix();
-        double[][] expected = {{2, 4},{6, 8}};
-        Assert.assertArrayEquals(expected[0], actual[0], 0);
-        Assert.assertArrayEquals(expected[0], actual[0], 0);
+        RankTwoTensor actual = this.tensor.scalarMultiply(2);
+        Assert.assertEquals(new RankTwoTensor(new double[][]{{2, 4},{6, 8}}), actual);
     }
 
 }

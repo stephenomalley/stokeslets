@@ -80,7 +80,7 @@ public class Phi2DTest {
     }
 
     @Test
-    public void testDydxGreensFunctionBAtOrigin(){
+    public void testDyDxGreensFunctionBAtOrigin(){
         Point2D.Double x = new Point2D.Double(0,0);
         Point2D.Double x0 = new Point2D.Double(0,0);
         RankTwoTensor tensor = this.blob.dxdyGreensFunctionB(x, x0);
@@ -89,12 +89,12 @@ public class Phi2DTest {
     }
 
     @Test
-    public void testDydxGreensFunctionBW(){
+    public void testDyDxGreensFunctionBW(){
         Point2D.Double x = new Point2D.Double(0,1);
         Point2D.Double x0 = new Point2D.Double(1,0);
-        RankTwoTensor tensor = this.blob.dxdyGreensFunctionB(x, x0);
-        Assert.assertArrayEquals(new double[]{0.01, 0}, tensor.getTensorMatrix()[0], 0.001);
-        Assert.assertArrayEquals(new double[]{-0.422, 0.01}, tensor.getTensorMatrix()[1], 0.001);
+        RankTwoTensor actual = this.blob.dxdyGreensFunctionB(x, x0);
+        Assert.assertArrayEquals(new double[]{0.01, 0}, actual.getTensorMatrix()[0], 0.001);
+        Assert.assertArrayEquals(new double[]{-0.422, 0.01}, actual.getTensorMatrix()[1], 0.001);
     }
 
 }

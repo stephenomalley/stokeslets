@@ -1,9 +1,14 @@
 package com.stephenomalley.space;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import java.util.Arrays;
+
 /**
  * Created by kida_ on 17/10/2016.
  */
-public class RankTwoTensor {
+public class RankTwoTensor implements Cloneable {
 
     protected double[][] tensorMatrix;
 
@@ -45,5 +50,25 @@ public class RankTwoTensor {
             }
         }
         return new RankTwoTensor(addition);
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (!(obj instanceof RankTwoTensor)){
+            return false;
+        }
+
+        if (obj == this){
+            return true;
+        }
+
+        RankTwoTensor rankTwoTensor = (RankTwoTensor) obj;
+
+        return Arrays.deepEquals(this.tensorMatrix, rankTwoTensor.getTensorMatrix());
+    }
+
+    @Override
+    public int hashCode(){
+        return new HashCodeBuilder().append(this.tensorMatrix).toHashCode();
     }
 }
